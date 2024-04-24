@@ -1,0 +1,52 @@
+<section class="text-indigo-200 h-screen body-font p-5 bg-gray-900">
+  <div to="coursedet">
+    <div class="mx-auto flex px-5  md:flex-row flex-col items-center jobcard">
+      <div
+        class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center">
+
+        <figure class="visible">
+          <div class="">
+            <div class="pt-10 px-2 sm:px-6">
+              <span
+                class="inline-block py-1 px-2 rounded-full bg-green-600 text-white  text-xs font-bold tracking-widest mb-2">Featured
+                Courses</span>
+              <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-100">{{courseData?.title}}</h1>
+              <div class="text-indigo-200 hidden-scroll h-40 overflow-auto text-base pb-6 text-justify">
+                <markdown [data]="courseData?.description">
+                  
+                  {{courseData?.description}}
+                </markdown>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center pb-12 ">
+                  <div class="h-12 w-12">
+                    <img [src]="courseData.thumbnail?.base64" alt
+                      class="h-full w-full object-cover overflow-hidden rounded-full" />
+                  </div>
+                  <p class="text-indigo-200 font-bold ml-3">
+                    {{courseData?.author}} <br />
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </figure>
+
+      </div>
+      <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 sm:block hidden">
+        <img class="object-cover object-center rounded" [width]="courseData.thumbnail?.width"
+          [height]="courseData.thumbnail?.height" alt="hero" [src]="courseData.thumbnail?.base64" />
+      </div>
+    </div>
+    <button *ngIf="!nowEnroled"
+      class="block select-none rounded-lg bg-blue-600 p-4 font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-700/10 transition-all hover:shadow-lg hover:shadow-blue-700/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+      type="button" (click)="EnrollCourse()">
+      Enroll
+    </button>
+    <a *ngIf="nowEnroled" [routerLink]="courseVideoLink"
+      class="block select-none w-32 rounded-lg bg-blue-600 p-4 font-sans text-sm font-bold uppercase text-white shadow-md shadow-blue-700/10 transition-all hover:shadow-lg hover:shadow-blue-700/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+      GoTo Course
+    </a>
+  </div>
+</section>

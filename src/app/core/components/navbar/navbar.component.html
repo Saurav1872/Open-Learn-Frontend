@@ -1,0 +1,58 @@
+<nav class="bg-white z-10 fixed top-0 w-full dark:bg-gray-900">
+  <div class=" flex flex-wrap items-center justify-between mx-auto p-4 border-solid border-black">
+    <a routerLink="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img [src]="logoImage" class="h-8" alt="OpenLean" />
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">OpenLearn</span>
+    </a>
+    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      @if (!isuserLoggedIn) {
+
+        <a routerLink="/login">
+          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
+        </a>
+        
+      }
+      @else{
+
+        <div>
+        
+          <button (click)="toggleprofilefunc()" class="w-10 h-10 rounded-full border " >
+            
+        </button>
+      <!-- folating window -->
+      <div *ngIf="toggleprofile"  class="group bg-gray-700
+       min-h-36 right-5 w-40 fixed flex flex-col items-center gap-2 rounded-lg p-4 text-sm leading-6 ">
+         
+        <!-- Content -->
+        <li *ngFor="let ele of profileFloatingNavigation" class="w-full list-none hover:translate-x-1 rounded-md border border-s-white px-5 py-1">
+          <a [routerLink]="ele.link" class="text-white font-semibold ">
+            {{ele.name}}
+          </a>
+        </li>
+        <li  class="w-full list-none bg-red-500  hover:translate-x-1 rounded-md border border-s-white px-5 py-1">
+          <button (click)="logout()" class="text-white font-semibold ">
+              Logout
+          </button>
+        </li>
+        
+      </div>
+      </div>
+    }
+      
+      <button (click)="toggleNavbar()" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" [attr.aria-expanded]="isNavbarOpen ? 'true' : 'false'">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
+        </svg>
+      </button>
+    </div>
+    <div class="items-center z-50 justify-between w-full md:flex md:w-auto md:order-1" id="navbar-cta" [ngClass]="{'hidden': !isNavbarOpen }">
+      <ul class="z-10 flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li *ngFor="let ele of navbarLinks">
+          <a [routerLink]="ele.link" class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">{{ele.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="mt-20"></div>

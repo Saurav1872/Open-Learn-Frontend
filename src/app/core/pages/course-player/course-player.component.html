@@ -1,0 +1,81 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <!-- <button class="toggleBtn" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button> -->
+
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <!-- <mat-sidenav class="sidenav" #snav [opened]="true" [mode]="mobileQuery.matches ? 'over' : 'side'"
+            [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+            <cdk-accordion class="accordion">
+
+                @for (modules of this.course.modules; track modules; let index = $index) {
+                <cdk-accordion-item #accordionItem="cdkAccordionItem" class="accordion-item" role="button" tabindex="0"
+                    [attr.id]="'accordion-header-' + index" [attr.aria-expanded]="accordionItem.expanded"
+                    [attr.aria-controls]="'accordion-body-' + index">
+
+                    <div class="accordion-item-header" (click)="accordionItem.toggle()">
+                        <span class="heading">{{(index + 1) + ". " + modules.name}}</span>
+                        @if(accordionItem.expanded) {
+                            <span><mat-icon>expand_less</mat-icon></span>
+                        }
+                        @else {
+                            <span><mat-icon>expand_more</mat-icon></span>
+                        }
+                    </div>
+
+                    <div class="accordion-item-body" role="region"
+                        [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                        [attr.aria-labelledby]="'accordion-header-' + index">
+                    
+                        @for (lecture of modules.lectures; track lecture; let index = $index) {
+                            <ul class="lecture-list">
+                              <li>
+                                <button mat-button (click)="playVideo(lecture.url)">
+                                  {{ lecture.title }}
+                                </button>
+                              </li>
+                            </ul>
+                          }
+
+                    </div>
+
+                </cdk-accordion-item>
+                }
+
+            </cdk-accordion>
+
+        </mat-sidenav> -->
+
+        <mat-sidenav-content>
+            <vg-player>
+                <vg-overlay-play></vg-overlay-play>
+                <vg-buffering></vg-buffering>
+
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+
+                <vg-controls>
+                    <vg-play-pause></vg-play-pause>
+                    <vg-playback-button></vg-playback-button>
+
+                    <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+                    <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+                    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+                    <vg-mute></vg-mute>
+                    <vg-volume></vg-volume>
+
+                    <vg-fullscreen></vg-fullscreen>
+                </vg-controls>
+                    
+                        <video  #media [vgMedia]="$any(media)" id="singleVideo" preload="none"
+                        [src]="videoUrl">
+                    </video>
+                   
+            </vg-player>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

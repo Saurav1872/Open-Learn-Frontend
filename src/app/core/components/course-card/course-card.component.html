@@ -1,0 +1,26 @@
+<div class="flex  flex-col max-w-[26rem] rounded-xl bg-white shadow-lg overflow-hidden mt-20">
+    <div class="relative h-40">
+        <img class="w-full h-full object-cover " [src]="course?.thumbnail?.base64" alt="Course Thumbnail">
+        <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
+    </div>
+    <div class="p-6">
+        <h5 class="font-bold text-xl text-gray-900 mb-2 h-[60px] overflow-hidden">{{ course.title }}</h5>
+        <div class="flex items-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                class="w-5 h-5 text-yellow-500 mr-1">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16z" clip-rule="evenodd" />
+                <path fill-rule="evenodd"
+                    d="M10 1a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H4a1 1 0 110-2h6V2a1 1 0 011-1z"
+                    clip-rule="evenodd" />
+            </svg>
+            <span class="text-gray-900 text-lg font-medium">5.0</span>
+        </div>
+        <p class="text-gray-700 text-base h-24 overflow-hidden">{{ course.description }}</p>
+    </div>
+    <div class="p-6 pt-3">
+        <a href="/course/{{ course._id }}"
+            class="block w-full py-3.5 px-7 bg-gray-900 text-white rounded-lg 
+            text-center font-semibold uppercase shadow-md hover:shadow-lg focus:outline-none 
+            focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50 transition-all">Browse</a>
+    </div>
+</div>

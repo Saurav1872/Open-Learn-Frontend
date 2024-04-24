@@ -1,0 +1,7 @@
+<ng-container *ngIf="listOfCourses.length > 0;">
+    <main class="p-5 flex flex-wrap gap-5 justify-start  items-center">
+        <ng-container *ngFor="let obj of listOfCourses">
+            <app-progress-card [course]="obj"></app-progress-card>
+        </ng-container>
+    </main>
+</ng-container>

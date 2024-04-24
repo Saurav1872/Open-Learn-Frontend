@@ -1,0 +1,32 @@
+<div mat-dialog-content #moduleFormContentTemplate>
+    <h2 mat-dialog-title style="font-size: xx-large;">Add Module</h2>
+    <form [formGroup]="moduleForm">
+      <div class="formContainer">
+          <h3>Module Name:</h3>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput formControlName="name">
+  
+        </mat-form-field>
+      </div>
+      <div class="formContainer">
+        <h3>Module Description:</h3>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Description</mat-label>
+          <input type="text" matInput formControlName="description">
+  
+        </mat-form-field>
+      </div>
+  
+    </form>
+  </div>
+  
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    @if(this.moduleForm.valid) {
+      <button mat-raised-button color="primary" type="submit"cdkFocusInitial (click)="onSubmit()">Submit</button>
+    }
+    @else {
+      <button mat-raised-button color="primary" type="submit" [disabled]="true">Submit</button>
+    }
+  </mat-dialog-actions>

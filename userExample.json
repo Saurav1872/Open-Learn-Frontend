@@ -1,0 +1,93 @@
+[
+    {
+        "fullName": "John Doe",
+        "userName": "johndoe",
+        "email": "johndoe@example.com",
+        "password": "password123",
+        "coursesIds": ["course1", "course2"],
+        "platformFollowers": 1000,
+        "profileImage": "profile.jpg",
+        "social": [
+          {
+            "svg": "facebook.svg",
+            "name": "Facebook",
+            "link": "https://www.facebook.com/johndoe"
+          },
+          {
+            "svg": "twitter.svg",
+            "name": "Twitter",
+            "link": "https://twitter.com/johndoe"
+          }
+        ],
+        "address": "123 Main St, Anytown",
+        "phoneNumber": "+1234567890",
+        "paymentMethods": ["Credit Card", "PayPal"],
+        "paymentHistory": ["605184df9d299b139ccde4db", "605184df9d299b139ccde4dc"],
+        "accountBalance": 100.5,
+        "accountStatus": "active",
+        "createdAt": "2024-03-28T08:00:00Z",
+        "lastLoginAt": "2024-03-27T08:00:00Z",
+        "notificationPreferences": {
+          "email": true,
+          "sms": false
+        },
+        "roles": ["user"]
+      },
+      {
+        "fullName": "Alice Smith",
+        "userName": "alicesmith",
+        "email": "alice@example.com",
+        "password": "securepassword",
+        "coursesIds": ["course3"],
+        "platformFollowers": 500,
+        "profileImage": "avatar.jpg",
+        "social": [
+          {
+            "svg": "instagram.svg",
+            "name": "Instagram",
+            "link": "https://www.instagram.com/alicesmith"
+          }
+        ],
+        "address": "456 Oak St, Anycity",
+        "phoneNumber": "+1987654321",
+        "paymentMethods": ["Bitcoin"],
+        "paymentHistory": ["605184df9d299b139ccde4dd"],
+        "accountBalance": 50.25,
+        "accountStatus": "inactive",
+        "createdAt": "2024-03-25T08:00:00Z",
+        "lastLoginAt": null,
+        "notificationPreferences": {
+          "email": false,
+          "sms": true
+        },
+        "roles": ["admin"]
+      },
+      {
+        "fullName": "Jane Doe",
+        "userName": "janedoe",
+        "email": "janedoe@example.com",
+        "password": "janedoespassword",
+        "accountBalance": 0,
+        "accountStatus": "inactive",
+        "createdAt": "2024-03-20T08:00:00Z",
+        "notificationPreferences": {
+          "email": true,
+          "sms": false
+        }
+      },
+      {
+        "fullName": "Sam Smith",
+        "userName": "samsmith",
+        "email": "samsmith@example.com",
+        "password": "samssecurepassword",
+        "createdAt": "2024-03-15T08:00:00Z",
+        "notificationPreferences": {
+          "email": false,
+          "sms": false
+        }
+      }
+      
+      
+      
+      
+]

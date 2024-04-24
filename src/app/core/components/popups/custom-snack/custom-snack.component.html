@@ -1,0 +1,13 @@
+<div fxLayout="row" class="snack-container" style="display: flex; justify-content: space-between;">
+    <div>
+      <span>{{data.message}}</span>
+    </div>
+    <div>
+      <mat-icon [ngClass]="{'success-icon': data.snackType === 'success',
+                               'error-icon': data.snackType === 'error',
+                               'warn-icon': data.snackType === 'warn',
+                               'info-icon': data.snackType === 'info'}">
+        {{getIcon()}}
+      </mat-icon>
+    </div>
+  </div>

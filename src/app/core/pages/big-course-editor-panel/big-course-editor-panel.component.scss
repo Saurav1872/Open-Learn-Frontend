@@ -1,0 +1,174 @@
+/* .formContainer {
+    margin: 13px;
+    margin-bottom: 0;
+    padding: 10px 30px;
+    font-size: 13px;
+}
+
+.formSubContainer {
+    display: inline-block;
+    width: 30vw;
+}
+
+
+.thumbnail-container {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 20px;
+    width: 20vw; 
+}
+*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.formInputFeild {
+    width: 50%;
+}
+
+.formContainer {
+    margin-bottom: 20px;
+}
+
+.formSubContainer {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 20px;
+}
+
+.flexContainer {
+    display: flex;
+    align-items: flex-start;
+}
+
+.visibility {
+    margin-left: auto;
+}
+
+
+.thumbnail-container {
+    width: 200px;
+}
+
+.thumbnail-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto 15px;
+}
+
+.thumbnail-buttons button {
+    margin: 10px;
+    width: 134px;
+
+}
+
+.description-container {
+    width: 70%;
+}
+
+
+
+.thumbnail-container img {
+    object-fit: fill;
+    margin-bottom: 10px;
+}
+
+.accordion-item {
+    display: block;
+    border: 1px solid #ccc;
+}
+
+
+.accordion-item+.accordion-item {
+    border-top: none;
+}
+
+.accordion-item-header {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.accordion-item-description {
+    font-size: 0.85em;
+    color: #999;
+}
+
+.accordion-item-header,
+.accordion-item-body {
+    padding: 5px 16px;
+}
+
+.accordion-item-header:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.accordion-item:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.accordion-item:last-child {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.accordion-container {
+    display: block;
+    margin: 20px;
+}
+
+.heading {
+    width: 70%;
+    word-wrap: break-word;
+}
+
+h2 {
+    color: #000;
+    font-weight: bolder;
+}
+
+h3 {
+    color: #000;
+    font-weight: 500;
+}
+
+
+
+
+@media screen and (max-width: 800px) {
+    .formSubContainer {
+        width: 100%;
+        display: block;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .flexContainer {
+        display: block;
+    }
+
+    .thumbnail-container {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .description-container {
+        width: 100%;
+    }
+
+    .visibility {
+        margin-left: 0;
+    }
+}

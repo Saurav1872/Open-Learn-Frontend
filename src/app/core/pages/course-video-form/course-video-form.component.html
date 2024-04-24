@@ -1,0 +1,138 @@
+<div class="container">
+
+    <div class="formContainer" [formGroup]="videoFormGroup">
+        <h2>Video Details:</h2>
+        <div class="formContainer flexContainer">
+            <div class="formSubContainer formInputFeild">
+                <h3>Video Link:</h3>
+                <div class="flexContainer">
+
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Videl Link</mat-label>
+                        <input type="text" [value]="this.video.link" matInput formControlName="courseVideoLinkCtrl">
+                        @if(videoFormGroup.get('courseVideoLinkCtrl')?.invalid &&
+                        videoFormGroup.get('courseVideoLinkCtrl')?.touched) {
+                        <mat-error>
+                            Course Video Link is <strong>required</strong>
+                        </mat-error>
+                        }
+                    </mat-form-field>
+                    @if(fetchedSuccess) {
+                    <button style="margin-left: 16px; transform: scale(2);" mat-icon-button color="primary"
+                        type="button">
+                        <mat-icon>check_circle</mat-icon>
+                    </button>
+                    }
+                    @else {
+                        @if (isLoading) {
+                            <button style="margin-left: 16px; transform: scale(2);" mat-icon-button color="primary"
+                                type="button" (click)="fetchVideo()" disabled>
+                                <mat-icon>download_for_offline</mat-icon>
+                            </button>
+                        }
+                        @else {
+                            <button style="margin-left: 16px; transform: scale(2);" mat-icon-button color="primary"
+                                type="button" (click)="fetchVideo()">
+                                <mat-icon>download_for_offline</mat-icon>
+                            </button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        @if(fetchedSuccess) {
+
+        <div class="formContainer flexContainer">
+            <div class="formSubContainer formInputFeild">
+                <h3>Course Title:</h3>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Title</mat-label>
+                    <input type="text" [value]="this.video.title" matInput formControlName="courseTitleCtrl">
+                    @if(videoFormGroup.get('courseTitleCtrl')?.invalid &&
+                    videoFormGroup.get('courseTitleCtrl')?.touched) {
+
+                    <mat-error>
+                        Course Title is <strong>required</strong>
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="formContainer flexContainer">
+            <div class="formSubContainer formInputFeild">
+                <h3>Course Price:</h3>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Price</mat-label>
+                    <input type="number" matInput formControlName="coursePriceCtrl">
+                    @if(videoFormGroup.get('coursePriceCtrl')?.invalid &&
+                    videoFormGroup.get('coursePriceCtrl')?.touched) {
+
+                    <mat-error>
+                        Course Price is <strong>required</strong>
+                    </mat-error>
+                    }
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="formContainer">
+            <h3>Thumbnail</h3>
+            <div class="flexContainer">
+
+                <div class="formSubContainer thumbnail-container">
+                    <mat-card>
+                        @if(imageUrl) {
+                        <img [src]="imageUrl" alt="Uploaded Image">
+                        }
+                        @else {
+                        <img src="assets/img/noimg.png" alt="Default Image">
+                        }
+                        <div>
+                            <input formControlName="courseThumbnailCtrl" #fileInput type="file"
+                                (change)="onFileSelected($event)" accept="image/*" class="hidden" hidden>
+                            @if (imageName) {
+                            <span style="display: block">{{ imageName }}</span>
+                            }
+                        </div>
+                    </mat-card>
+                </div>
+                <div class="formSubContainer thumbnail-buttons flexContainer">
+                    <!-- <div style="display: flex; flex-direction: column; justify-content: center; height: 90px;"> -->
+                    <button mat-stroked-button color="primary" type="button" (click)="fileInput.click()">Choose
+                        File</button>
+                    <button mat-stroked-button color="primary" type="button" (click)="uploadImage()">Upload
+                        Image</button>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="formContainer">
+            <div class="formSubContainer description-container">
+                <h3>Description</h3>
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="7"
+                        cdkAutosizeMaxRows="30" formControlName="courseDescriptionCtrl"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+        }
+
+        @else if (isLoading) {
+            <div class="loader">
+                <mat-spinner></mat-spinner>
+            </div>
+        }
+        <div>
+            @if(fetchedSuccess && !isSubmitting) {
+                <button style="width: 134px; height: 44px; font-size: medium;" mat-raised-button color="primary"
+                    type="submit" (click)="submit()">Submit</button>
+            }
+            @else {
+                <button style="width: 134px; height: 44px; font-size: medium;" mat-raised-button color="primary"
+                    type="submit" (click)="submit()" disabled>Submit</button>
+            }
+        </div>
+    </div>
+</div>

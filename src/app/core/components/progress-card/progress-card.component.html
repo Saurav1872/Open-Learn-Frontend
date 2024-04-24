@@ -1,0 +1,19 @@
+<div class="courses-container">
+    <div class="course">
+        <div class="course-preview">
+            <h6>{{course.title}}</h6>
+            <a href="#">View all chapters</a>
+        </div>
+        <div class="course-info">
+            <div class="progress-container">
+                <div class="progress" [style]="'--progress-width:' + progressPercentage + '%'"></div>
+                <span class="progress-text">
+                    {{progressPercentage}}% completed
+                </span>
+            </div>
+            <a href="#" class="author"><h6>{{course.author}}</h6></a>
+            <h2>{{date}}</h2>
+            <button class="btn">Continue</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div mat-dialog-content #lectureFormContentTemplate>
+  <h2 mat-dialog-title style="font-size: xx-large;">Add Lecture</h2>
+  <form [formGroup]="lectureForm">
+    <div class="formContainer">
+        <h3>Lecture Title:</h3>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Title</mat-label>
+        <input type="text" matInput formControlName="title">
+
+      </mat-form-field>
+    </div>
+    <div class="formContainer">
+      <h3>Lecture Description:</h3>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput formControlName="description">
+
+      </mat-form-field>
+    </div>
+    <div class="formContainer">
+      <h3>Lecture Youtube Link:</h3>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Youtube Link</mat-label>
+        <input type="text" matInput formControlName="url">
+
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button type="button" (click)="cancel()">Cancel</button>
+  @if(this.lectureForm.valid) {
+    <button mat-raised-button color="primary" type="submit"cdkFocusInitial (click)="onSubmit()">Submit</button>
+  }
+  @else {
+    <button mat-raised-button color="primary" type="submit" [disabled]="true">Submit</button>
+  }
+</mat-dialog-actions>

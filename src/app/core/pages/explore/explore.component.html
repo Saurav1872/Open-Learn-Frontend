@@ -1,0 +1,26 @@
+<main class="mt-16 p-5 flex flex-wrap gap-5 transition-transform justify-center  items-center">
+  @if(isLoading) {
+    <!-- <div class="spinner"> -->
+      <!-- <mat-spinner></mat-spinner> -->
+      <app-loading-card></app-loading-card>
+      <app-loading-card></app-loading-card>
+      <app-loading-card></app-loading-card>
+      <app-loading-card></app-loading-card>
+      <app-loading-card></app-loading-card>
+      <app-loading-card></app-loading-card>
+    <!-- </div> -->
+  }
+  @else {
+    <ng-container *ngFor="let obj of dataSource">
+      <app-course-card [course]="obj"></app-course-card>
+    </ng-container>
+  }
+  
+</main>
+<mat-paginator style="margin: 10px auto;"
+
+[length]="listOfCourses.length"
+[pageSize]="listSize"
+(page)="onListPageChange($event)"
+[pageSizeOptions]="listSizeOptions">
+</mat-paginator>

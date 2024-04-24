@@ -1,0 +1,258 @@
+<mat-stepper class="stepper" [orientation]="(stepperOrientation | async)!">
+    <mat-step [stepControl]="courseFormGroup" label="Course Overview" [errorMessage]="getErrorMessageCourse()">
+        <form [formGroup]="courseFormGroup">
+            <h2>Course Details:</h2>
+            <div class="formContainer flexContainer">
+                <div class="formSubContainer formInputFeild">
+                    <h3>Course Title:</h3>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Title</mat-label>
+                        <input type="text" matInput formControlName="courseTitleCtrl">
+                        <mat-error *ngIf="courseFormGroup.controls['courseTitleCtrl']?.hasError('required')">
+                            Course Title is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="formSubContainer visibility">
+                    <h3>Visibility</h3>
+                    <mat-slide-toggle formControlName="coursePublicCtrl">
+                        <span>{{courseFormGroup.controls['coursePublicCtrl'].value ? 'Public' : 'Private'}}</span>
+                    </mat-slide-toggle>
+                </div>
+            </div>
+            <div class="formContainer flexContainer">
+                <div class="formSubContainer formInputFeild">
+                    <h3>Course Price:</h3>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Price</mat-label>
+                        <input type="number" matInput formControlName="coursePriceCtrl">
+                        <mat-error *ngIf="courseFormGroup.controls['coursePriceCtrl']?.hasError('required')">
+                            Course price is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="formContainer flexContainer">
+                <div class="formSubContainer formInputFeild">
+                    <h3>Course Tags:</h3>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Tags</mat-label>
+                        <mat-chip-grid #chipGrid aria-label="Enter fruits">
+                            @for (tag of tags; track tag) {
+                              <mat-chip-row
+                                (removed)="remove(tag)"
+                                [editable]="true"
+                                (edited)="edit(tag, $event)"
+                                [aria-description]="'press enter to edit ' + tag">
+                                {{tag}}
+                                <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                                  <mat-icon>cancel</mat-icon>
+                                </button>
+                              </mat-chip-row>
+                            }
+                            <input placeholder="New tag..."
+                                   [matChipInputFor]="chipGrid"
+                                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                   [matChipInputAddOnBlur]="addOnBlur"
+                                   (matChipInputTokenEnd)="add($event)"/>
+                          </mat-chip-grid>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="formContainer">
+                <h3>Thumbnail</h3>
+                <div class="flexContainer">
+
+                    <div class="formSubContainer thumbnail-container">
+                        <mat-card>
+                            @if(imageUrl) {
+                            <img [src]="imageUrl" alt="Uploaded Image">
+                            }
+                            @else {
+                            <img src="../../assets/img/noimg.png" alt="Default Image">
+                            }
+                            <div>
+                                <input formControlName="courseThumbnailCtrl" #fileInput type="file"
+                                    (change)="onFileSelected($event)" accept="image/*" class="hidden" hidden>
+                                @if (imageName) {
+                                <span style="display: block">{{ imageName }}</span>
+                                }
+                            </div>
+                        </mat-card>
+                    </div>
+                    <div class="formSubContainer thumbnail-buttons flexContainer">
+                        <!-- <div style="display: flex; flex-direction: column; justify-content: center; height: 90px;"> -->
+                        <button mat-stroked-button color="primary" type="button" (click)="fileInput.click()">Choose
+                            File</button>
+                        <button mat-stroked-button color="primary" type="button" (click)="uploadImage()">Upload
+                            Image</button>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="formContainer">
+                <div class="formSubContainer description-container">
+                    <h3>Description</h3>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="7"
+                            cdkAutosizeMaxRows="30" formControlName="courseDescriptionCtrl"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+        <div style="display: flex; justify-content: flex-end; padding: 10px 10px;">
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="modulesFormGroup" label="Course Modules" [errorMessage]="getErrorMessageModule()">
+        <div class="formContainer" style="text-align: right;">
+            <div class="formSubContainer">
+                <button mat-raised-button color="primary" (click)="openModuleDialog()">Add Module</button>
+            </div>
+        </div>
+
+        <div [formGroup]="modulesFormGroup">
+
+            <cdk-accordion class="accordion">
+                @for (module of this.course.modules; track module; let index = $index) {
+                <cdk-accordion-item [formGroupName]="'moduleFormGroupItem' + index" #accordionItem="cdkAccordionItem"
+                    class="accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+                    [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+                    <div class="accordion-item-header">
+                        <span style="display: flex; align-items: center;">{{(index+1) + ". "}} </span>
+                        <span class="heading" style="display: flex; align-items: center;">{{module.name}}</span>
+                        <button mat-icon-button color="primary" (click)="accordionItem.toggle()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteModule(module)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div class="accordion-item-body" role="region"
+                        [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                        [attr.aria-labelledby]="'accordion-header-' + index">
+                        <div class="formContainer">
+                            <h3>Module Name:</h3>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Name</mat-label>
+                                <input type="text" matInput formControlName="moduleNameCtrl">
+
+                                @if(modulesFormGroup.get('moduleFormGroupItem' + index)?.get('moduleNameCtrl')?.invalid
+                                && modulesFormGroup.get('moduleFormGroupItem' + index)?.get('moduleNameCtrl')?.touched)
+                                {
+                                <mat-error>Module name is <strong>required</strong></mat-error>
+                                }
+
+                            </mat-form-field>
+                        </div>
+                        <div class="formContainer">
+                            <h3>Module Description:</h3>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Description</mat-label>
+                                <input type="text" matInput formControlName="moduleDescriptionCtrl">
+                                @if(modulesFormGroup.get('moduleFormGroupItem' + index)?.get('moduleNameCtrl')?.invalid
+                                && modulesFormGroup.get('moduleFormGroupItem' + index)?.get('moduleNameCtrl')?.touched)
+                                {
+                                <mat-error>Module description is <strong>required</strong></mat-error>
+                                }
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+                </cdk-accordion-item>
+                }
+            </cdk-accordion>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 10px;">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step [stepControl]="lectureFormGroup" label="Lectures">
+
+        <div [formGroup]="lectureFormGroup">
+
+            <div class="formContainer">
+                <h3>Select Module</h3>
+                <mat-form-field>
+                    <mat-label>Select Module</mat-label>
+                    <mat-select [(value)] = "selectedModule" (selectionChange) = "changeLectureFormControl()">
+                        <mat-option [value] = "null"></mat-option>
+                        @for (module of this.course.modules; track module; let index = $index) {
+                        <mat-option [value]="module">{{module.name}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            @if(this.selectedModule != undefined) {
+
+            <div class="formContainer" style="text-align: right;">
+                <div class="formSubContainer">
+                    <!-- <button mat-raised-button color="primary" (click)="addLecture(makeDummyLecture())">Add Lecture</button> -->
+                    <button mat-raised-button color="primary" (click)="openLectureDialog()">Add Lecture</button>
+                </div>
+            </div>
+
+
+            <cdk-accordion class="accordion">
+                @for (lecture of selectedModule.lectures; track lecture; let index = $index) {
+                <cdk-accordion-item [formGroupName]="'lectureFormGroupItem' + index" #accordionItem="cdkAccordionItem"
+                    class="accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+                    [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+                    <div class="accordion-item-header">
+                        <span style="display: flex; align-items: center;">{{(index+1) + ". "}} </span>
+                        <span class="heading" style="display: flex; align-items: center;">{{lecture.title}}</span>
+                        <button mat-icon-button color="primary" (click)="accordionItem.toggle()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteLecture(lecture)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div class="accordion-item-body" role="region"
+                        [style.display]="accordionItem.expanded ? '' : 'none'" [attr.id]="'accordion-body-' + index"
+                        [attr.aria-labelledby]="'accordion-header-' + index">
+                        <div class="formContainer">
+                            <h3>Lecture Title:</h3>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Title</mat-label>
+                                <input type="text" matInput formControlName="lectureTitleCtrl">
+
+                            </mat-form-field>
+                        </div>
+                        <div class="formContainer">
+                            <h3>Lecture Description:</h3>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Description</mat-label>
+                                <input type="text" matInput formControlName="lectureDescriptionCtrl">
+
+                            </mat-form-field>
+                        </div>
+                        <div class="formContainer">
+                            <h3>Lecture Youtube Link:</h3>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>Youtube Link</mat-label>
+                                <input type="text" matInput formControlName="lectureUrlCtrl">
+
+                            </mat-form-field>
+                        </div>
+
+
+
+                    </div>
+                </cdk-accordion-item>
+                }
+            </cdk-accordion>
+
+            }
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: 10px 10px;">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" (click)="submitCourseDetails()">Submit</button>
+        </div>
+    </mat-step>
+</mat-stepper>

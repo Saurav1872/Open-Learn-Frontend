@@ -1,0 +1,110 @@
+
+<main class="p-10 flex flex-wrap gap-5 justify-center align-middle">
+    <form action="">
+        <div class="formContainer formHeader">
+            <h1>Upload Course</h1>
+            <hr />
+            <p class="font-thin">
+                Upload the youtube unlisted video link and video details in their respective course.
+            </p>
+            <hr />
+            <h6 style="color: red;">* Indicates required feilds</h6>
+        </div>
+
+        <div class="formContainer">
+         
+
+            <h3>Select Course <span style="color: red;">*</span></h3>
+            <mat-form-field>
+                <mat-label>Select Courses</mat-label>
+                <mat-select #courseSelect [formControl]="selectCourseFormControl" [value]="selectedCourse"
+                    (valueChange)="onCourseSelected()">
+                    <mat-option></mat-option>
+                    @for (course of coursesList; track trackByFn) {
+                    <mat-option [value]="course">{{course.name}}</mat-option>
+                    }
+                </mat-select>
+                @if (selectCourseFormControl.hasError('required')) {
+                <mat-error>Selecting course is required.</mat-error>
+                }
+            </mat-form-field>
+        </div>
+
+        <div class="formContainer">
+            <h3>Lecture Link <span style="color: red;">*</span></h3>
+            <mat-form-field>
+                <mat-label>YouTube URL</mat-label>
+                <input type="text" matInput [formControl]="youtubeFormControl"
+                    placeholder="Ex. https://www.youtube.com/watch?v=zWh3CShX_do">
+                @if (youtubeFormControl.hasError('required')) {
+                <mat-error>YouTube URL is <strong>required</strong></mat-error>
+                }
+                @else if (youtubeFormControl.hasError('invalidYoutubeLink')) {
+                <mat-error>Please enter a valid YouTube URL</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="formContainer">
+            <h3>Lecture Title<span style="color: red;">*</span></h3>
+            <mat-form-field>
+                <mat-label>Lectue Title</mat-label>
+                <input type="text" matInput [formControl]="lectureTitleControl">
+                @if (youtubeFormControl.hasError('required')) {
+                <mat-error>Title is required.</mat-error>
+                }
+            </mat-form-field>
+        </div>
+        <div class="formContainer" style="display: flex; flex-direction: column; align-items: flex-start;">
+            <h3>Lecture Thumbnail<span style="color: red;">*</span></h3>
+            <div style="display: flex; align-items: flex-start; margin-top: 10px;">
+                <mat-card class="thumbnail-container">
+                    @if(imageUrl) {
+                    <img [src]="imageUrl" alt="Uploaded Image">
+                    }
+                    @else {
+                    <img src="../../assets/img/noimg.png" alt="Default Image">
+                    }
+                    <div>
+                        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" class="hidden"
+                            hidden>
+                        @if (imageName) {
+                        <span style="display: block">{{ imageName }}</span>
+                        }
+                    </div>
+                </mat-card>
+                <div style="display: flex; flex-direction: column; justify-content: center; height: 90px;">
+                    <button mat-stroked-button color="primary" type="button"
+                        style="border: 1px solid #3f51b5; align-self: center; margin: auto 10px;  width: 15vw;"
+                        (click)="fileInput.click()">Choose File</button>
+                    <button mat-stroked-button color="primary" type="button"
+                        style="border: 1px solid #3f51b5; align-self: center; margin: auto 10px;  width: 15vw;"
+                        (click)="uploadImage()">Upload Image</button>
+                </div>
+                <!-- <div class="flex flex-col justify-center ml-4 sm:flex-row sm:justify-start">
+                    <button mat-stroked-button color="primary" type="button" class="hidden sm:inline-block"
+                        (click)="fileInput.click()">Choose File</button>
+                    <button mat-stroked-button color="primary" type="button" class="hidden sm:inline-block"
+                        (click)="uploadImage()">Upload Image</button>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="formContainer">
+            <h3>Lecture Description <span style="color: red;">*</span></h3>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
+                    cdkAutosizeMaxRows="20"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="btn-container"
+            style="width: 40vw; display: flex; justify-content: space-between; align-items: center; margin: 20px auto; padding: 0 20px;">
+            <button
+                style="background-color: #663ab5; color: white; border-radius: 3px; padding: 8px 19px; margin: 13px; margin-left: 0px; margin-bottom: 0;"
+                mat-raised-button class="submitBtn" type="submit">Submit</button>
+
+            <span style="cursor: pointer; color: purple; text-decoration: underline;" id="clearFormButton">Clear
+                Form</span>
+        </div>
+    </form>
+</main>
