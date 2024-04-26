@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { log } from 'console';
 import { Observable, of, throwError } from 'rxjs';
@@ -13,7 +13,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements AfterViewInit {
   constructor(private http: HttpClient) { }
   logoImage = "/assets/img/logo.png";
   isuserLoggedIn = false;
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
 
   cookies: string = "";
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.checkCookie().subscribe((res: any) => {
       if (res.ok) {
         console.log('cookies found!');
