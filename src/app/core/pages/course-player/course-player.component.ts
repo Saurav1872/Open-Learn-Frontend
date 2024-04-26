@@ -84,7 +84,7 @@ export class CoursePlayerComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
   ngOnInit(): void {
-    this.http.get(`http://localhost:5000/api/v1/video-url/${this.courseId}?video=true&&audio=true`,{withCredentials:true}).subscribe((res:any)=>{
+    this.http.get(`https://atomic-marjie-openlearn.koyeb.app/api/v1/video-url/${this.courseId}?video=true&&audio=true`,{withCredentials:true}).subscribe((res:any)=>{
       console.log(res.data.url);
       
       console.log("Done! ");

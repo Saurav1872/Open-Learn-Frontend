@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit{
   
   ngOnInit(): void {
     console.log(this.parameter);
-    this.http.get(`http://localhost:5000/auth/get-user-details/${this.parameter}`,{withCredentials:true}).subscribe((res : any )=>{
+    this.http.get(`https://atomic-marjie-openlearn.koyeb.app/auth/get-user-details/${this.parameter}`,{withCredentials:true}).subscribe((res : any )=>{
      console.log(res);
      this.totalCourses = res?.courses?.length;
      if(!this.totalCourses) this.totalCourses = 0;

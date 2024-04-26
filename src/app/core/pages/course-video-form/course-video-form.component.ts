@@ -114,7 +114,7 @@ export class CourseVideoFormComponent implements OnInit {
 
     try {
       this.isLoading = true;
-      this.http.get(`http://localhost:5000/api/v1/yt-video-url/${videoID}/video-details`, { withCredentials: true }).subscribe((res: any) => {
+      this.http.get(`https://atomic-marjie-openlearn.koyeb.app/api/v1/yt-video-url/${videoID}/video-details`, { withCredentials: true }).subscribe((res: any) => {
         console.log(res);
         if (!res.ok) {
           this._snackBar.openFromComponent(CustomSnackComponent, {
@@ -177,7 +177,7 @@ export class CourseVideoFormComponent implements OnInit {
   submit() {
     this.isSubmitting = true;
     const id: string = this.extractVideoId(this.video.link);
-    this.http.put('http://localhost:5000/auth/addvideo', { youtubeVideoId: id }, { withCredentials: true }).subscribe((res: any) => {
+    this.http.put('https://atomic-marjie-openlearn.koyeb.app/auth/addvideo', { youtubeVideoId: id }, { withCredentials: true }).subscribe((res: any) => {
 
       console.log(res);
       if (res.ok) {

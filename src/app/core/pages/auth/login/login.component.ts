@@ -37,7 +37,7 @@ export class LoginComponent {
       password: this.password
     });
 
-    this.http.post('http://localhost:5000/auth/login', {
+    this.http.post('https://atomic-marjie-openlearn.koyeb.app/auth/login', {
       userName: this.userName,
       password: this.password
     }, { withCredentials: true }).subscribe((res: any) => {

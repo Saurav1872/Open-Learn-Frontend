@@ -22,7 +22,7 @@ export class CourseVisitComponent implements OnInit {
   courseVideoLink = '/coursePlayer/'+this.id;
   ngOnInit() {
    
-    this.http.get(`http://localhost:5000/api/v1/video-url/${this.id}/video-details`,{withCredentials:true}).subscribe((res:any)=>{
+    this.http.get(`https://atomic-marjie-openlearn.koyeb.app/api/v1/video-url/${this.id}/video-details`,{withCredentials:true}).subscribe((res:any)=>{
       if(res.ok){
         this.courseData=res.info;
       }
@@ -37,7 +37,7 @@ export class CourseVisitComponent implements OnInit {
     })
   }
   EnrollCourse(){
-    this.http.put<any>(`http://localhost:5000/auth/enroll/${this.id}`, {}, { withCredentials: true }).subscribe((res:any)=>{
+    this.http.put<any>(`https://atomic-marjie-openlearn.koyeb.app/auth/enroll/${this.id}`, {}, { withCredentials: true }).subscribe((res:any)=>{
         if(!res.ok){
           return ;
         }

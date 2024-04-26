@@ -16,7 +16,7 @@ export class ProgressComponent {
   listOfCourses: any = [];
   ngOnInit(): void {
     this.http
-      .get('http://localhost:5000/api/v1/trackProgress', { withCredentials: true })
+      .get('https://atomic-marjie-openlearn.koyeb.app/api/v1/trackProgress', { withCredentials: true })
       .subscribe((res: any) => {
         if (res.ok) {
           console.log(res);

@@ -26,7 +26,7 @@ export class ExploreComponent implements OnInit {
   dataSource: any = [];
   ngOnInit(): void {
     this.isLoading = true;
-    this.http.get('http://localhost:5000/api/v1/videos/trending', { withCredentials: true }).subscribe((res: any) => {
+    this.http.get('https://atomic-marjie-openlearn.koyeb.app/api/v1/videos/trending', { withCredentials: true }).subscribe((res: any) => {
       if (res.ok) {
         this.isLoading = false;
         this.listOfCourses = res.topCourses;

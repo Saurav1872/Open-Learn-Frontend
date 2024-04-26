@@ -57,7 +57,7 @@ export class NavbarComponent implements OnInit {
   }
 
   checkCookie(): Observable<any> {
-    return this.http.get('http://localhost:5000/auth/is-valid-Cookie', { withCredentials: true }).pipe(
+    return this.http.get('https://atomic-marjie-openlearn.koyeb.app/auth/is-valid-Cookie', { withCredentials: true }).pipe(
       catchError(this.handleError)
     );
   }
@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.http.post('http://localhost:5000/auth/logout', {}, { withCredentials: true }).subscribe((res: any) => {
+    this.http.post('https://atomic-marjie-openlearn.koyeb.app/auth/logout', {}, { withCredentials: true }).subscribe((res: any) => {
       if (!res.ok) {
         return;
       }
