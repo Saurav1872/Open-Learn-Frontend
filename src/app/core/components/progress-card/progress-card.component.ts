@@ -20,6 +20,6 @@ export class ProgressCardComponent {
 
 
   loadCourse() {
-    this.router.navigate([`coursePlayer+${this.course._id}`])
+    this.router.navigate([`coursePlayer/+${this.course._id}`])
   }
 }
