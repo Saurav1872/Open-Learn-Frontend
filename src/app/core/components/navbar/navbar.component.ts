@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { log } from 'console';
@@ -36,23 +36,40 @@ export class NavbarComponent implements AfterViewInit {
   cookies: string = "";
 
   ngAfterViewInit(): void {
-    this.checkCookie().subscribe((res: any) => {
-      if (res.ok) {
-        console.log('cookies found!');
-        this.profileFloatingNavigation[0].link = '/user/'+res.userName;
-        console.log(res);
-        
-        this.isuserLoggedIn = true;
-      } else {
-        console.log('cookies not found!');
-        // window.location.href = '/login';   // this is infinite loop donot uncomment
+    // this.checkCookie().subscribe((res: any) => {
+    //   if (res.ok) {
+    //     console.log('cookies found!');
+    //     this.profileFloatingNavigation[0].link = '/user/'+res.userName;
+    //     console.log(res);
+
+    //     this.isuserLoggedIn = true;
+    //   } else {
+    //     console.log('cookies not found!');
+    //     // window.location.href = '/login';   // this is infinite loop donot uncomment
+    //   }
+    // });
+
+    this.http.get('https://atomic-marjie-openlearn.koyeb.app/auth/is-valid-Cookie', { withCredentials: true }).subscribe(
+      (res: any) => {
+        if (res.ok) {
+          console.log('cookies found!');
+          this.profileFloatingNavigation[0].link = '/user/' + res.userName;
+          console.log(res);
+
+          this.isuserLoggedIn = true;
+        } else {
+          console.log('cookies not found!');
+          // window.location.href = '/login';   // this is infinite loop donot uncomment
+        }
+      }, (error:HttpErrorResponse) => {
+        // do nothing
       }
-    });
+    )
   }
 
-  private handleError(error: HttpErrorResponse):any {
+  private handleError(error: HttpErrorResponse): any {
     // do nothing for now
-    
+
     return of([]);
   }
 
