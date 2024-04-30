@@ -44,5 +44,10 @@ export class ExploreComponent implements OnInit {
     const from = event.pageIndex * event.pageSize;
     const to = from + event.pageSize;
     this.dataSource = this.listOfCourses.slice(from, to);
+    this.scrollToTop();
+  }
+
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
 }
