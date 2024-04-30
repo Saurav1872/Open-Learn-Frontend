@@ -26,7 +26,8 @@ export class NavbarComponent implements AfterViewInit {
   ];
   profileFloatingNavigation = [
     { link: '/user/0', name: 'Profile' },
-    { link: '/videoForm', name: 'Create' },
+    { link: '/videoForm', name: 'Create Oneshot' },
+    { link: '/editorPanel', name: 'Create Course' },
     { link: '/settings', name: 'Settings' },
   ]
   toggleprofile = false;
