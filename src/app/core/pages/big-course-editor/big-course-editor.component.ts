@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Router } from '@angular/router';
 interface Courses {
   position: number,
   name: string
@@ -26,6 +27,10 @@ interface Courses {
   styleUrl: './big-course-editor.component.scss'
 })
 export class BigCourseEditorComponent {
+
+  constructor(private router: Router) {
+    
+  }
 
   courses: Courses[] = [
     { position: 1, name: 'Course A'},
@@ -52,6 +57,7 @@ export class BigCourseEditorComponent {
   editCourse(course: Courses) {
     // Implement edit logic here
     console.log("Edited course " + course.name);
+    this.router.navigate(['editorPanel']);
   }
 
   dataSource = new MatTableDataSource<Courses>(this.courses);
